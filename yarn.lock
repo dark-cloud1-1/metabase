@@ -8198,6 +8198,14 @@ cache-base@^1.0.1:
     union-value "^1.0.0"
     unset-value "^1.0.0"
 
+cache2@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/cache2/-/cache2-2.0.5.tgz#4937aac141569753436233b749b4425f19a9bac1"
+  integrity sha512-Iub3oCclExM6ICbNBTMQtad14Sh7vs9tRrfnsqSLNK4K+LZBI4FQrb2EUIa3U0OHUy7UYAu+V28UL1ODP38GNA==
+  dependencies:
+    emitter-pro "^1.2.1"
+    tslib "^2.6.2"
+
 cacheable-request@^6.0.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/cacheable-request/-/cacheable-request-6.1.0.tgz#20ffb8bd162ba4be11e9567d823db651052ca912"
@@ -8585,6 +8593,11 @@ classnames@2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
   integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
+
+classnames@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.5.1.tgz#ba774c614be0f016da105c858e7159eae8e7687b"
+  integrity sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==
 
 clean-css@^4.2.3:
   version "4.2.3"
@@ -10472,6 +10485,11 @@ elliptic@^6.5.3, elliptic@^6.5.4:
     inherits "^2.0.4"
     minimalistic-assert "^1.0.1"
     minimalistic-crypto-utils "^1.0.1"
+
+emitter-pro@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/emitter-pro/-/emitter-pro-1.2.1.tgz#7e1247524911c58700dcd029ee71c24060abbcd7"
+  integrity sha512-lug8KjGIDpgLcQKWog4y8SowPV1EUtosYTPiX7urGAedCNOqSONgp5eEwO2o6uWXbVXdB1ddxKUs94pl5VdIkg==
 
 emittery@^0.13.1:
   version "0.13.1"
@@ -19348,6 +19366,24 @@ raw-loader@^4.0.2:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
+rc-hooks@^3.0.8:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/rc-hooks/-/rc-hooks-3.0.9.tgz#1ec76cd782fc4c1b80a73e7909c3228442b17a69"
+  integrity sha512-qwbdDRibj6umO4tSGvE3upQtnHxBRybvoD4x/6kZDn5+8binFBhcqHtpA1zgM9YVu+X8Zb7ASCRxllSUCqaTaQ==
+  dependencies:
+    tslib "^2.6.2"
+    ut2 "^1.9.1"
+    util-helpers "^4.22.2"
+
+rc-slider-captcha@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/rc-slider-captcha/-/rc-slider-captcha-1.4.2.tgz#b5e027cf55a4f4cadbf9161bc29e4cba2af2dc83"
+  integrity sha512-9/DRxp0eF/jP3qfrYOQTvZjCVUlboaoN0CAfkDXI30WWqbY5HcI4/8bMTZazgl+rPn4QfdSjByAffO2Ypjlrqw==
+  dependencies:
+    classnames "^2.5.1"
+    rc-hooks "^3.0.8"
+    tslib "^2.6.2"
+
 rc@^1.2.8:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.8.tgz#cd924bf5200a075b83c188cd6b9e211b7fc0d3ed"
@@ -22685,7 +22721,7 @@ tslib@^2.0.3:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
   integrity sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
 
-tslib@^2.1.0, tslib@^2.4.0:
+tslib@^2.1.0, tslib@^2.4.0, tslib@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.2.tgz#703ac29425e7b37cd6fd456e92404d46d1f3e4ae"
   integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
@@ -23341,10 +23377,25 @@ use@^3.1.0:
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
   integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
 
+ut2@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/ut2/-/ut2-1.9.1.tgz#7c89ac6c1c1c39b95ddfd915395420e82c5364ed"
+  integrity sha512-HDVCgC6XMeIWYJJa0bfUvnI+smujHJul9HBViFuB43kwKgxgL2SAzMkRIaz8katM61v20cbhQQwrzvw/HswSXA==
+
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
+
+util-helpers@^4.22.2:
+  version "4.22.2"
+  resolved "https://registry.yarnpkg.com/util-helpers/-/util-helpers-4.22.2.tgz#f3f1fc24dbcfe3fdf680e2d6d44fab74a788716d"
+  integrity sha512-pmku3lWyobFnqpEURInjI1sZDO5ZEMOancOtfmymId59ab/nCr62hR4BjcVDtiVHZ6oEWM/ug8kduwnpFUSr8A==
+  dependencies:
+    cache2 "^2.0.5"
+    emitter-pro "^1.2.1"
+    tslib "^2.6.2"
+    ut2 "^1.9.1"
 
 util.promisify@1.0.0:
   version "1.0.0"

@@ -6,12 +6,16 @@ import { CLOSE_QB_NEWB_MODAL } from "metabase/query_builder/actions";
 import { UserApi } from "metabase/services";
 import type { User } from "metabase-types/api";
 
+// 创建一个异步的 Redux thunk action，用于刷新当前用户信息
 export const refreshCurrentUser = createAsyncThunk(
-  "metabase/user/REFRESH_CURRENT_USER",
+  "metabase/user/REFRESH_CURRENT_USER", // 指定 action 的类型，通常用一个字符串常量表示
   async (_, { fulfillWithValue }) => {
+    // 参数中不需要传入额外的数据，因此使用占位符 _
     try {
+      // 调用后端 API 获取当前用户信息
       return UserApi.current();
     } catch (e) {
+      // 如果发生错误，使用 fulfillWithValue 方法返回一个带有 null 值的成功操作，以便后续处理
       return fulfillWithValue(null);
     }
   },

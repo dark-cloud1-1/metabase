@@ -80,6 +80,7 @@
     "password-generator": "^2.0.1",
     "postcss-discard-comments": "^6.0.1",
     "prop-types": "^15.5.7",
+    "rc-slider-captcha": "^1.4.2",
     "re-reselect": "^4.0.1",
     "react": "^17.0.2",
     "react-ace": "^9.5.0",

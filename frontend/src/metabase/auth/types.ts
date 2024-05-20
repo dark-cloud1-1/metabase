@@ -1,6 +1,7 @@
 export interface LoginData {
-  username: string;
+  username?: number;
   password: string;
+  phoneCode?: number;
   remember?: boolean;
 }
 

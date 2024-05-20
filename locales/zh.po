@@ -32769,3 +32769,14 @@ msgstr "按住 Option 键可下载未格式化的结果"
 msgid "Hold the Alt key to download unformatted results"
 msgstr "按住 Alt 键可下载未格式化的结果"
 
+msgid "Mobile phone"
+msgstr "手机号"
+
+msgid "Please enter mobile phone number"
+msgstr "清输入你的手机号"
+
+msgid "Mobile phone"
+msgstr "验证码"
+
+msgid "Please enter phone code"
+msgstr "请输入手机验证码"

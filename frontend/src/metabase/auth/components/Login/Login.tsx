@@ -23,12 +23,19 @@ interface LoginProps {
 }
 
 export const Login = ({ params, location }: LoginProps): JSX.Element => {
+  // 从 Redux store 中获取认证提供程序的列表
   const providers = useSelector(getAuthProviders);
+  // 根据传入的提供程序名称选择要显示的提供程序
   const selection = getSelectedProvider(providers, params?.provider);
+  // 获取重定向 URL
   const redirectUrl = location?.query?.redirect;
+  // 获取应用程序名称
   const applicationName = useSelector(getApplicationName);
+
   return (
+    // 渲染登录页面布局
     <AuthLayout>
+      {/* 显示应用程序名称 */}
       <Box
         role="heading"
         c="text-dark"
@@ -39,15 +46,20 @@ export const Login = ({ params, location }: LoginProps): JSX.Element => {
       >
         {t`Sign in to ${applicationName}`}
       </Box>
+      {/* 如果选择了提供程序，则渲染该提供程序的登录面板 */}
       {selection && selection.Panel && (
         <Box mt="2.5rem">
+          {/* 渲染提供程序的登录面板，并传递重定向 URL */}
           <selection.Panel redirectUrl={redirectUrl} />
         </Box>
       )}
+      {/* 如果没有选择提供程序，则渲染所有提供程序的登录按钮 */}
       {!selection && (
         <Box mt="3.5rem">
+          {/* 渲染所有提供程序的登录按钮 */}
           {providers.map(provider => (
             <Box key={provider.name} mt="2rem" ta="center">
+              {/* 渲染提供程序的登录按钮，并传递重定向 URL */}
               <provider.Button isCard={true} redirectUrl={redirectUrl} />
             </Box>
           ))}
@@ -57,6 +69,7 @@ export const Login = ({ params, location }: LoginProps): JSX.Element => {
   );
 };
 
+// 根据提供程序名称选择要显示的提供程序
 const getSelectedProvider = (
   providers: AuthProvider[],
   providerName?: string,
@@ -66,5 +79,6 @@ const getSelectedProvider = (
       ? providers.find(p => p.name === providerName)
       : providers[0];
 
+  // 如果提供程序存在面板，则返回该提供程序
   return provider?.Panel ? provider : undefined;
 };
