@@ -1,4 +1,5 @@
-import { useMemo } from "react"; // 导入React钩子函数useMemo
+import SliderCaptcha from "rc-slider-captcha";
+import { useMemo, useState } from "react"; // 导入React钩子函数useMemo
 import { t } from "ttag"; // 导入ttag用于国际化字符串
 import * as Yup from "yup"; // 导入Yup用于表单验证
 
@@ -9,10 +10,15 @@ import FormSubmitButton from "metabase/core/components/FormSubmitButton"; // 导
 import { Form, FormProvider } from "metabase/forms"; // 导入表单和表单提供者组件
 import * as Errors from "metabase/lib/errors"; // 导入错误处理工具
 
+// 导入验证码
+
 import type { LoginData } from "../../types"; // 导入登录数据类型
 
-import { SendCodeConiner, SendCodeButton } from "./LoginForm.styled";
-
+import {
+  SendCodeConiner,
+  SendCodeButton,
+  SendCodeButtonDisabled,
+} from "./LoginForm.styled";
 // 定义登录表单的验证规则
 const LOGIN_SCHEMA = Yup.object().shape({
   // username: Yup.string()
@@ -37,8 +43,6 @@ interface LoginFormProps {
   onSubmit: (data: LoginData) => void; // 提交表单的回调函数
 }
 
-// const [sliderCaptcha,setSliderCaptcha] = useState(false)
-
 // 登录表单组件
 export const LoginForm = ({
   isLdapEnabled,
@@ -61,7 +65,22 @@ export const LoginForm = ({
     }),
     [isLdapEnabled],
   );
-
+  // 是否显示验证码
+  const [sliderCaptcha, setSliderCaptcha] = useState(false);
+  const [codeSending, setCodeSending] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(60);
+  let timer: any;
+  const timingStart = (time: number) => {
+    setCodeSending(true);
+    setTimeRemaining(time);
+    timer = setInterval(() => {
+      setTimeRemaining(timeRemaining - 1);
+      if (timeRemaining <= 0) {
+        clearInterval(timer);
+        setCodeSending(false);
+      }
+    }, 1000);
+  };
   return (
     <FormProvider
       initialValues={initialValues} // 提供表单的初始值
@@ -93,9 +112,30 @@ export const LoginForm = ({
             type="input" // 输入框类型
             placeholder={t`请输入手机验证码`} // 输入框占位符
           />
-          <SendCodeButton>{t`发送验证码`}</SendCodeButton>
+          {/* <SendCodeButton onClick={()=>setSliderCaptcha(true)}>{t`发送验证码`}</SendCodeButton> */}
+          {(codeSending && (
+            <SendCodeButtonDisabled>{t`重新发送${timeRemaining}`}</SendCodeButtonDisabled>
+          )) || (
+            <SendCodeButton
+              onClick={() => setSliderCaptcha(true)}
+            >{t`发送验证码`}</SendCodeButton>
+          )}
         </SendCodeConiner>
 
+        {sliderCaptcha && (
+          <SliderCaptcha
+            request={async () => ({
+              bgUrl: "",
+              puzzleUrl: "",
+            })}
+            onVerify={async () => {
+              // console.log(data);
+              setSliderCaptcha(false);
+              timingStart(60);
+              return Promise.resolve();
+            }}
+          />
+        )}
         {/* 如果不存在会话cookies，则显示“记住我”复选框 */}
         {!hasSessionCookies && (
           <FormCheckBox name="remember" title={t`Remember me`} />

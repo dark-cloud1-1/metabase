@@ -28,6 +28,24 @@ export const SendCodeButton = styled.div`
   }
 `;
 
+export const SendCodeButtonDisabled = styled.div`
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  border: 1px solid #eeecec;
+  border-radius: 8px;
+  background-color: ${color("bg-white")};
+  color: ${color("text-dark")};
+  flex: 1;
+  text-align: center;
+  align-self: end;
+  margin-bottom: 1.25rem;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 export const GoogleButtonRoot = styled.div`
   display: flex;
   justify-content: center;
