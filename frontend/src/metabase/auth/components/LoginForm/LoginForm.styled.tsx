@@ -5,7 +5,7 @@ import { color } from "metabase/lib/colors";
 
 export const SendCodeConiner = styled.div`
   display: flex;
-  justify-content:center
+  justify-content: center;
   align-items: center;
 `;
 
@@ -22,6 +22,7 @@ export const SendCodeButton = styled.div`
   text-align: center;
   align-self: end;
   margin-bottom: 1.25rem;
+  margin-left: 1.25rem;
   cursor: pointer;
   &:hover {
     opacity: 0.8;
@@ -41,8 +42,51 @@ export const SendCodeButtonDisabled = styled.div`
   text-align: center;
   align-self: end;
   margin-bottom: 1.25rem;
+  margin-left: 1.25rem;
   &:hover {
     opacity: 0.8;
+  }
+`;
+
+export const SliderCaptchaBG = styled.div`
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #00000069;
+  color: ${color("text-dark")};
+  z-index: 999;
+  & > div {
+    margin: auto;
+  }
+`;
+
+export const SliderCaptchaBox = styled.div`
+  padding: 1rem;
+  background: #fff;
+  margin: auto;
+  border-radius: 0.5rem;
+  & .rc-slider-captcha-jigsaw-puzzle {
+    position: absolute;
+  }
+  & .rc-slider-captcha-jigsaw {
+    position: relative;
+  }
+  & .rc-slider-captcha-jigsaw-refresh {
+    position: absolute;
+    top: -1.55rem;
+    right: 1.5rem;
+  }
+`;
+export const SliderExit = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  & > .exit {
+    transform: scaleX(1.5);
   }
 `;
 

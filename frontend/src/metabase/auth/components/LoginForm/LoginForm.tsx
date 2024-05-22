@@ -18,7 +18,11 @@ import {
   SendCodeConiner,
   SendCodeButton,
   SendCodeButtonDisabled,
+  SliderCaptchaBG,
+  SliderCaptchaBox,
+  SliderExit,
 } from "./LoginForm.styled";
+import { bgImg, puzzleImg } from "./img.json";
 // 定义登录表单的验证规则
 const LOGIN_SCHEMA = Yup.object().shape({
   // username: Yup.string()
@@ -68,13 +72,16 @@ export const LoginForm = ({
   // 是否显示验证码
   const [sliderCaptcha, setSliderCaptcha] = useState(false);
   const [codeSending, setCodeSending] = useState(false);
-  const [timeRemaining, setTimeRemaining] = useState(60);
+  let [timeRemaining, setTimeRemaining] = useState(60);
   let timer: any;
   const timingStart = (time: number) => {
     setCodeSending(true);
-    setTimeRemaining(time);
+    timeRemaining = time;
+    setTimeRemaining(timeRemaining);
     timer = setInterval(() => {
-      setTimeRemaining(timeRemaining - 1);
+      timeRemaining--;
+      setTimeRemaining(timeRemaining);
+      // console.log('执行',timeRemaining);
       if (timeRemaining <= 0) {
         clearInterval(timer);
         setCodeSending(false);
@@ -112,7 +119,6 @@ export const LoginForm = ({
             type="input" // 输入框类型
             placeholder={t`请输入手机验证码`} // 输入框占位符
           />
-          {/* <SendCodeButton onClick={()=>setSliderCaptcha(true)}>{t`发送验证码`}</SendCodeButton> */}
           {(codeSending && (
             <SendCodeButtonDisabled>{t`重新发送${timeRemaining}`}</SendCodeButtonDisabled>
           )) || (
@@ -123,19 +129,33 @@ export const LoginForm = ({
         </SendCodeConiner>
 
         {sliderCaptcha && (
-          <SliderCaptcha
-            request={async () => ({
-              bgUrl: "",
-              puzzleUrl: "",
-            })}
-            onVerify={async () => {
-              // console.log(data);
-              setSliderCaptcha(false);
-              timingStart(60);
-              return Promise.resolve();
-            }}
-          />
+          <SliderCaptchaBG>
+            <SliderCaptchaBox>
+              <SliderExit>
+                <span>安全验证</span>
+                <span className="exit" onClick={() => setSliderCaptcha(false)}>
+                  X
+                </span>
+              </SliderExit>
+              <SliderCaptcha
+                showRefreshIcon={true}
+                request={async () => ({
+                  bgUrl: bgImg,
+                  puzzleUrl: puzzleImg,
+                })}
+                onVerify={async (data: any) => {
+                  if (data.x >= 80 && data.x <= 110) {
+                    setSliderCaptcha(false);
+                    timingStart(3);
+                    return Promise.resolve();
+                  }
+                  return Promise.reject();
+                }}
+              />
+            </SliderCaptchaBox>
+          </SliderCaptchaBG>
         )}
+
         {/* 如果不存在会话cookies，则显示“记住我”复选框 */}
         {!hasSessionCookies && (
           <FormCheckBox name="remember" title={t`Remember me`} />
