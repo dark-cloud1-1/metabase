@@ -15,7 +15,13 @@ import { UserFieldGroup, UserFormRoot } from "./UserForm.styled";
 const USER_SCHEMA = Yup.object({
   first_name: Yup.string().nullable().default(null).max(100, Errors.maxLength),
   last_name: Yup.string().nullable().default(null).max(100, Errors.maxLength),
-  email: Yup.string().default("").required(Errors.required).email(Errors.email),
+  email: Yup.string()
+    .default("")
+    .required(Errors.required)
+    .matches(
+      /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
+      "手机号格式不正确",
+    ),
   site_name: Yup.string().default("").required(Errors.required),
   password: Yup.string()
     .default("")
@@ -78,8 +84,8 @@ export const UserForm = ({
         <FormInput
           name="email"
           type="email"
-          title={t`Email`}
-          placeholder="nicetoseeyou@email.com"
+          title={t`手机号`}
+          placeholder="请输入手机号"
         />
         <FormInput
           name="site_name"

@@ -24,6 +24,7 @@ export const SendCodeButton = styled.div`
   margin-bottom: 1.25rem;
   margin-left: 1.25rem;
   cursor: pointer;
+  white-space: nowrap;
   &:hover {
     opacity: 0.8;
   }
@@ -43,6 +44,7 @@ export const SendCodeButtonDisabled = styled.div`
   align-self: end;
   margin-bottom: 1.25rem;
   margin-left: 1.25rem;
+  white-space: nowrap;
   &:hover {
     opacity: 0.8;
   }
@@ -68,16 +70,15 @@ export const SliderCaptchaBox = styled.div`
   background: #fff;
   margin: auto;
   border-radius: 0.5rem;
-  & .rc-slider-captcha-jigsaw-puzzle {
-    position: absolute;
-  }
-  & .rc-slider-captcha-jigsaw {
-    position: relative;
+  & .rc-slider-captcha-panel-inner {
+    overflow: visible;
   }
   & .rc-slider-captcha-jigsaw-refresh {
     position: absolute;
-    top: -1.55rem;
-    right: 1.5rem;
+    top: -1.9rem;
+    right: 1.2rem;
+    color: #000;
+    font-size: 1rem;
   }
 `;
 export const SliderExit = styled.div`
