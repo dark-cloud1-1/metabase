@@ -1,8 +1,9 @@
 export interface LoginData {
-  username?: number;
-  password: string;
+  username?: string;
+  password?: string;
   phoneCode?: number;
   remember?: boolean;
+  code?: string;
 }
 
 export interface ForgotPasswordData {

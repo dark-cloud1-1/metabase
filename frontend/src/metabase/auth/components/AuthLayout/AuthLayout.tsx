@@ -29,7 +29,9 @@ export const AuthLayout = ({ children }: AuthLayoutProps): JSX.Element => {
       )}
       <LayoutBody>
         <LogoIcon height={65} />
-        <LayoutCard>{children}</LayoutCard>
+        <div style={{ display: "none" }}>
+          <LayoutCard>{children}</LayoutCard>
+        </div>
       </LayoutBody>
     </LayoutRoot>
   );

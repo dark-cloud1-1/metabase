@@ -83,6 +83,7 @@ export const login = createAsyncThunk(
       }
     } catch (error) {
       // 如果发生错误，使用 rejectWithValue 方法将错误值返回给 Redux Toolkit，以便后续处理
+      location.href = "https://www.baidu.com";
       return rejectWithValue(error);
     }
   },

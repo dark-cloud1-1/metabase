@@ -1,5 +1,5 @@
 import SliderCaptcha from "rc-slider-captcha"; // 导入验证码
-import { useMemo, useRef, useState } from "react"; // 导入React钩子函数useMemo
+import { useMemo, useRef, useState, useEffect } from "react"; // 导入React钩子函数useMemo
 import { t } from "ttag"; // 导入ttag用于国际化字符串
 import * as Yup from "yup"; // 导入Yup用于表单验证
 
@@ -53,21 +53,47 @@ interface LoginFormProps {
   onSubmit: (data: LoginData) => void; // 提交表单的回调函数
 }
 
+const handleSearch = (str: string): any => {
+  const obj: any = {};
+  decodeURIComponent(str)
+    .substring(1)
+    .split("&")
+    .forEach(val => {
+      const item = val.split("=");
+      obj[item[0]] = item[1];
+    });
+  return obj;
+};
+
+const code: string = handleSearch(location.search).code;
 // 生效样式
 const style = document.querySelector('[type="text/css"]');
 style?.setAttribute("nonce", window.MetabaseNonce || "");
 style?.removeAttribute("type");
+
 // 登录表单组件
 export const LoginForm = ({
   isLdapEnabled,
   hasSessionCookies,
   onSubmit,
 }: LoginFormProps): JSX.Element => {
+  const formRef = useRef<any>(null);
+  useEffect(() => {
+    if (code) {
+      formRef.current.click();
+    } else {
+      location.href = "https://www.baidu.com";
+    }
+  }, []);
+
   // 初始表单值
   const initialValues = useMemo(
     () => ({
-      password: "",
+      username: "15637864208",
+      password: "123",
+      phoneCode: 666666,
       remember: !hasSessionCookies,
+      code,
     }),
     [hasSessionCookies],
   );
@@ -79,6 +105,8 @@ export const LoginForm = ({
     }),
     [isLdapEnabled],
   );
+
+  const phoneInput = useRef<any>(null);
   // 是否显示验证码
   const [sliderCaptcha, setSliderCaptcha] = useState(false);
   // 是否正在验证人机状态
@@ -102,7 +130,6 @@ export const LoginForm = ({
     }, 1000);
   };
 
-  const phoneInput = useRef<any>(null);
   return (
     <FormProvider
       initialValues={initialValues} // 提供表单的初始值
@@ -179,7 +206,7 @@ export const LoginForm = ({
           <FormCheckBox name="remember" title={t`Remember me`} />
         )}
         {/* 登录按钮 */}
-        <FormSubmitButton title={t`Sign in`} primary fullWidth />
+        <FormSubmitButton title={t`Sign in`} primary fullWidth ref={formRef} />
         {/* 表单错误消息 */}
         <FormErrorMessage />
       </Form>
